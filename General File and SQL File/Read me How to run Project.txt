@@ -1,0 +1,25 @@
+How to run Project
+
+Open Link-> https://shreycars.000webhostapp.com/index.php
+
+To Signin as User -> https://shreycars.000webhostapp.com/login.php
+
+To Signup as User -> https://shreycars.000webhostapp.com/signup.php
+
+
+For admin works open link-> https://shreycars.000webhostapp.com/admin/
+
+To Signup as admin -> https://shreycars.000webhostapp.com/admin/signup.php (This link is hidden from every user from webpage.)
+
+
+USER AND ADMIN CREDENTIALS TO ACCESS PROJECT:
+
+For User
+Login Details for user:
+Username : test@gmail.com
+Password: Test@123
+
+For Admin Panel
+Login Details for admin :
+Username: admin@gmail.com
+Password: admin@12
