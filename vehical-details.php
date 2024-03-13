@@ -12,6 +12,16 @@ $status=0;
 $vhno = $_GET['vhno'];
 $vhid=$_GET['vhid'];
 $bookingno=mt_rand(100000000, 999999999);
+
+
+// Retrieve ownerId from the tblvehicles table based on the selected vehicle
+$sql_owner = "SELECT ownerId FROM tblvehicles WHERE id = :vhid";
+$query_owner = $dbh->prepare($sql_owner);
+$query_owner->bindParam(':vhid', $vhid, PDO::PARAM_INT);
+$query_owner->execute();
+$row = $query_owner->fetch(PDO::FETCH_ASSOC);
+$ownerId = $row['ownerId'];
+
 $ret="SELECT * FROM tblbooking where (:fromdate BETWEEN date(FromDate) and date(ToDate) || :todate BETWEEN date(FromDate) and date(ToDate) || date(FromDate) BETWEEN :fromdate and :todate) and VehicleId=:vhid";
 $query1 = $dbh -> prepare($ret);
 $query1->bindParam(':vhid',$vhid, PDO::PARAM_STR);
@@ -24,7 +34,8 @@ $results1=$query1->fetchAll(PDO::FETCH_OBJ);
 if($query1->rowCount()==0)
 {
 
-$sql="INSERT INTO  tblbooking(BookingNumber,userEmail,VehicleId,VehicleNo,FromDate,ToDate,message,Status) VALUES(:bookingno,:useremail,:vhid,:vhno,:fromdate,:todate,:message,:status)";
+$sql="INSERT INTO  tblbooking(BookingNumber,userEmail,VehicleId,VehicleNo,FromDate,ToDate,message,Status, carOwnerId) VALUES(:bookingno,:useremail,:vhid,:vhno,:fromdate,:todate,:message,:status, :ownerId)";
+        
 $query = $dbh->prepare($sql);
 $query->bindParam(':bookingno',$bookingno,PDO::PARAM_STR);
 $query->bindParam(':useremail',$useremail,PDO::PARAM_STR);
@@ -34,6 +45,7 @@ $query->bindParam(':fromdate',$fromdate,PDO::PARAM_STR);
 $query->bindParam(':todate',$todate,PDO::PARAM_STR);
 $query->bindParam(':message',$message,PDO::PARAM_STR);
 $query->bindParam(':status',$status,PDO::PARAM_STR);
+$query->bindParam(':ownerId',$ownerId,PDO::PARAM_STR);
 $query->execute();
 $lastInsertId = $dbh->lastInsertId();
 if($lastInsertId)

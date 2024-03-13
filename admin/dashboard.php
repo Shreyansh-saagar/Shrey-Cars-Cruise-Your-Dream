@@ -6,7 +6,9 @@ if(strlen($_SESSION['alogin'])==0)
 	{	
 header('location:index.php');
 }
-else{?>
+else{
+    $ownerId = isset($_GET['ownerId']) ? $_GET['ownerId'] : 0; 
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -66,8 +68,9 @@ else{?>
 	<div class="swiper mySwiper-RANDOMID">
         <div class="swiper-wrapper "><!-- Slides -->
             <?php 
-            $sql1 ="SELECT id from tblvehicles ";
-            $query1 = $dbh -> prepare($sql1);;
+            $sql1 ="SELECT id from tblvehicles WHERE ownerId = :ownerId";
+            $query1 = $dbh -> prepare($sql1);
+            $query1->bindParam(':ownerId', $ownerId, PDO::PARAM_INT);
             $query1->execute();
             $results1=$query1->fetchAll(PDO::FETCH_OBJ);
             $totalvehicle=$query1->rowCount();
@@ -94,8 +97,9 @@ else{?>
         
 
             <?php 
-            $sql2 ="SELECT id from tblbooking ";
+            $sql2 ="SELECT id from tblbooking WHERE carOwnerId = :ownerId ";
             $query2= $dbh -> prepare($sql2);
+            $query2->bindParam(':ownerId', $ownerId, PDO::PARAM_INT);
             $query2->execute();
             $results2=$query2->fetchAll(PDO::FETCH_OBJ);
             $bookings=$query2->rowCount();

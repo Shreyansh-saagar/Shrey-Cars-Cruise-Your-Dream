@@ -25,8 +25,10 @@ move_uploaded_file($_FILES["img1"]["tmp_name"],"vehicleimages/".$_FILES["img1"][
 move_uploaded_file($_FILES["img2"]["tmp_name"],"vehicleimages/".$_FILES["img2"]["name"]);
 move_uploaded_file($_FILES["img3"]["tmp_name"],"vehicleimages/".$_FILES["img3"]["name"]);
 move_uploaded_file($_FILES["img4"]["tmp_name"],"vehicleimages/".$_FILES["img4"]["name"]);
+$ownerId = $_SESSION['ownerId'];
 
-$sql="INSERT INTO tblvehicles(VehiclesTitle,VehicleNo,VehiclesOverview,PricePerDay,FuelType,ModelYear,SeatingCapacity,Vimage1,Vimage2,Vimage3,Vimage4) VALUES(:vehicletitle,:vehicleno,:vehicleoverview,:priceperday,:fueltype,:modelyear,:seatingcapacity,:vimage1,:vimage2,:vimage3,:vimage4)";
+
+$sql="INSERT INTO tblvehicles(VehiclesTitle,VehicleNo,VehiclesOverview,PricePerDay,FuelType,ModelYear,SeatingCapacity,Vimage1,Vimage2,Vimage3,Vimage4, ownerId) VALUES(:vehicletitle,:vehicleno,:vehicleoverview,:priceperday,:fueltype,:modelyear,:seatingcapacity,:vimage1,:vimage2,:vimage3,:vimage4, :ownerId)";
 $query = $dbh->prepare($sql);
 $query->bindParam(':vehicletitle',$vehicletitle,PDO::PARAM_STR);
 $query->bindParam(':vehicleno',$vehicleno,PDO::PARAM_STR);
@@ -39,6 +41,7 @@ $query->bindParam(':vimage1',$vimage1,PDO::PARAM_STR);
 $query->bindParam(':vimage2',$vimage2,PDO::PARAM_STR);
 $query->bindParam(':vimage3',$vimage3,PDO::PARAM_STR);
 $query->bindParam(':vimage4',$vimage4,PDO::PARAM_STR);
+$query->bindParam(':ownerId',$ownerId,PDO::PARAM_INT);
 $query->execute();
 $lastInsertId = $dbh->lastInsertId();
 if($lastInsertId)

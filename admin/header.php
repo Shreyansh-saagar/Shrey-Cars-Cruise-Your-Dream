@@ -13,10 +13,11 @@
 				<li class="nav-item me-4"><a class="nav-link" href="add-vehical.php">Add Cars</a></li>
 				<li class="nav-item me-4"><a class="nav-link" href="manage-vehicals.php">Manage Cars</a></li>
 				<li class="nav-item me-4"><a class="nav-link" href="manage-bookings.php">All Bookings</a></li>
-				<li class="nav-item me-4"><a class="nav-link" href="dashboard.php">Dashboard</a></li>
+				<li class="nav-item me-4"><a class="nav-link" href='dashboard.php?ownerId=<?php echo $_SESSION['ownerId']; ?>'>Dashboard</a></li>
 			</ul>
-			<div><a class="btn btn-outline-danger me-2" href="logout.php">Logout</a></div>
+			<?php if(isset($_SESSION['alogin'])) { ?>
+				<div><a class="btn btn-outline-danger me-2" href="logout.php">Logout</a></div>
+			<?php } ?>
 		</div>
 	</div>
 </nav>
- 

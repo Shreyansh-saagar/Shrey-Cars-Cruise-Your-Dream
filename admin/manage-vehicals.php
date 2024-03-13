@@ -43,8 +43,11 @@ $msg="Vehicle  record deleted successfully";
         <h3>Manage Vehicals</h3>
 
 
-        <?php $sql = "SELECT tblvehicles.VehiclesTitle,tblvehicles.VehicleNo,tblvehicles.PricePerDay,tblvehicles.FuelType,tblvehicles.ModelYear,tblvehicles.id from tblvehicles";
+        <?php 
+        $ownerId = $_SESSION['ownerId'];
+        $sql = "SELECT VehiclesTitle, VehicleNo, PricePerDay, FuelType, ModelYear, id FROM tblvehicles WHERE ownerId = :ownerId";
         $query = $dbh -> prepare($sql);
+        $query->bindParam(':ownerId', $ownerId, PDO::PARAM_INT);
         $query->execute();
         $results=$query->fetchAll(PDO::FETCH_OBJ);
         $cnt=1;

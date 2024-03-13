@@ -89,7 +89,7 @@ error_reporting(0);
 	<div class="row justify-content-center">
 		<div class="lc-block text-center col-md-8">
 			<div editable="rich">
-				<h1 class="rfs-25 fw-bold">Book your car, Match your speed</h1>
+				<h1 class="rfs-25 fw-bold">Cruise Your Dream</h1>
 			</div>
 		</div>
 	</div>

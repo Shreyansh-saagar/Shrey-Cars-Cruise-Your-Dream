@@ -25,7 +25,7 @@
 				<!-- /lc-block -->
 				<div class="lc-block small">
 					<div editable="rich">
-						<a href="dashboard.php" class="my-4 text-decoration-none text-black">Dashboard</a>
+						<a href="dashboard.php?ownerId=<?php echo $_SESSION['ownerId']; ?>" class="my-4 text-decoration-none text-black">Dashboard</a>
 						<br><br>
 						<a href="manage-vehicals.php" class="my-4 text-decoration-none text-black">Manage Vehicles</a>
 						<br><br>
@@ -63,6 +63,8 @@
 				<!-- /lc-block -->
 				<div class="lc-block small">
 					<div editable="rich">
+ 							<a href="../admin/signup.php" class="my-4 text-decoration-none text-black">Admin Sign Up</a>
+							<br><br>
 							<a href="../admin" class="my-4 text-decoration-none text-black">Admin Page</a>
 							<br><br>
 							<a href="contact.php" class="my-4 text-decoration-none text-black">Contact Us</a>

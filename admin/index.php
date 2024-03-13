@@ -5,7 +5,7 @@ if(isset($_POST['login']))
 {
 $email=$_POST['username'];
 $password=md5($_POST['password']);
-$sql ="SELECT UserName,Password FROM admin WHERE UserName=:email and Password=:password";
+$sql ="SELECT id, UserName, Password FROM admin WHERE UserName=:email AND Password=:password";
 $query= $dbh -> prepare($sql);
 $query-> bindParam(':email', $email, PDO::PARAM_STR);
 $query-> bindParam(':password', $password, PDO::PARAM_STR);
@@ -14,7 +14,10 @@ $results=$query->fetchAll(PDO::FETCH_OBJ);
 if($query->rowCount() > 0)
 {
 $_SESSION['alogin']=$_POST['username'];
-echo "<script type='text/javascript'> document.location = 'dashboard.php'; </script>";
+$ownerId = $results[0]->id;
+$_SESSION['ownerId'] = $ownerId;
+header("Location: dashboard.php?ownerId=$ownerId");
+exit;
 } else{
   
   echo "<script>alert('Invalid Details');</script>";
@@ -68,7 +71,7 @@ echo "<script type='text/javascript'> document.location = 'dashboard.php'; </scr
                     <button class="btn btn-primary btn-block" name="login" type="submit">Login</button>
 				</div>
 			</form>
-			<!--<p class="mb-2 text-decoration-none">Don't have an account? <a href="signup.php" data-toggle="modal" class="text-decoration-none" data-dismiss="modal">Signup</a></p>-->
+			<p class="mb-2 text-decoration-none">Don't have an account? <a href="signup.php" data-toggle="modal" class="text-decoration-none" data-dismiss="modal">Signup</a></p>
         </div>
     </div>
 </div>

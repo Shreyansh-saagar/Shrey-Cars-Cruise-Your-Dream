@@ -62,8 +62,12 @@ $msg="Booking Successfully Confirmed";
     </div>
 
     <div class="container ">
-        <?php $sql = "SELECT tblusers.FullName,tblusers.ContactNo ,tblvehicles.VehicleNo,tblvehicles.VehiclesTitle,tblbooking.FromDate,tblbooking.ToDate,tblbooking.message,tblbooking.VehicleId as vid,tblbooking.Status,tblbooking.id  from tblbooking join tblvehicles on tblvehicles.id=tblbooking.VehicleId join tblusers on tblusers.EmailId=tblbooking.userEmail ";
+        <?php 
+            $ownerId = $_SESSION['ownerId'];
+            $sql = "SELECT u.FullName, u.ContactNo, v.VehicleNo, v.VehiclesTitle, b.FromDate, b.ToDate, b.message, b.VehicleId AS vid, b.Status, b.id FROM tblbooking b JOIN tblvehicles v ON v.id = b.VehicleId JOIN tblusers u ON u.EmailId = b.userEmail WHERE b.carOwnerId = :ownerId";
+        
             $query = $dbh -> prepare($sql);
+            $query->bindParam(':ownerId', $ownerId, PDO::PARAM_INT);
             $query->execute();
             $results=$query->fetchAll(PDO::FETCH_OBJ);
             $cnt=1;
