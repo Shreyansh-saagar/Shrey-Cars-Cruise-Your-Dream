@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 03, 2024 at 01:48 PM
+-- Generation Time: Mar 13, 2024 at 06:39 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -39,7 +39,8 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`id`, `UserName`, `Password`, `updationDate`) VALUES
-(2, 'shre@gmail.com', '0cf952ad4ebff357eeee343e3634db6b', '2024-03-02 22:05:49');
+(2, 'shre@gmail.com', '0cf952ad4ebff357eeee343e3634db6b', '2024-03-02 22:05:49'),
+(3, 'radhe@gmail.com', 'fad1baf6464b5da8f87896439ca2de03', '2024-03-13 09:02:42');
 
 -- --------------------------------------------------------
 
@@ -58,18 +59,20 @@ CREATE TABLE `tblbooking` (
   `message` varchar(255) DEFAULT NULL,
   `Status` int(11) DEFAULT NULL,
   `PostingDate` timestamp NOT NULL DEFAULT current_timestamp(),
-  `LastUpdationDate` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
+  `LastUpdationDate` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
+  `carOwnerId` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tblbooking`
 --
 
-INSERT INTO `tblbooking` (`id`, `BookingNumber`, `userEmail`, `VehicleId`, `VehicleNo`, `FromDate`, `ToDate`, `message`, `Status`, `PostingDate`, `LastUpdationDate`) VALUES
-(8, 848466689, 'shre@gmail.com', 10, 'MH 01 AB 1234', '2024-03-08', '2024-03-09', 'Need car clean and clear for business work.', 1, '2024-03-03 10:13:08', '2024-03-03 10:13:40'),
-(9, 584132608, 'shre@gmail.com', 15, 'KA 06 KL 1234', '2024-03-17', '2024-03-24', 'Send professional driver, coz we booked car for trip to Himachal Pradesh with family. Also check brakes and engine properly.', 1, '2024-03-03 10:16:12', '2024-03-03 10:16:39'),
-(10, 735032391, 'saurav@gmail.com', 13, 'TN 04 GH 3456', '2024-03-14', '2024-03-15', 'AC is must.', 1, '2024-03-03 10:32:38', '2024-03-03 10:33:18'),
-(11, 919046229, 'saurav@gmail.com', 11, 'DL 02 CD 5678', '2024-03-29', '2024-03-31', 'Check tires and breaks properly need to go Mumbai urgently and come back.', 1, '2024-03-03 10:34:41', '2024-03-03 10:34:58');
+INSERT INTO `tblbooking` (`id`, `BookingNumber`, `userEmail`, `VehicleId`, `VehicleNo`, `FromDate`, `ToDate`, `message`, `Status`, `PostingDate`, `LastUpdationDate`, `carOwnerId`) VALUES
+(8, 848466689, 'shre@gmail.com', 10, 'MH 01 AB 1234', '2024-03-08', '2024-03-09', 'Need car clean and clear for business work.', 1, '2024-03-03 10:13:08', '2024-03-13 09:14:20', 2),
+(9, 584132608, 'shre@gmail.com', 15, 'KA 06 KL 1234', '2024-03-17', '2024-03-24', 'Send professional driver, coz we booked car for trip to Himachal Pradesh with family. Also check brakes and engine properly.', 1, '2024-03-03 10:16:12', '2024-03-13 06:56:02', 2),
+(10, 735032391, 'saurav@gmail.com', 13, 'TN 04 GH 3456', '2024-03-14', '2024-03-15', 'AC is must.', 1, '2024-03-03 10:32:38', '2024-03-13 06:56:02', 2),
+(11, 919046229, 'saurav@gmail.com', 11, 'DL 02 CD 5678', '2024-03-29', '2024-03-31', 'Check tires and breaks properly need to go Mumbai urgently and come back.', 1, '2024-03-03 10:34:41', '2024-03-13 06:56:02', 2),
+(12, 907584213, 'shre@gmail.com', 19, 'DL 01 AB 1794', '2024-03-14', '2024-03-15', 'To visit amritsar.', 1, '2024-03-13 09:12:53', '2024-03-13 09:13:13', 3);
 
 -- --------------------------------------------------------
 
@@ -119,21 +122,25 @@ CREATE TABLE `tblvehicles` (
   `Vimage3` varchar(120) DEFAULT NULL,
   `Vimage4` varchar(120) DEFAULT NULL,
   `RegDate` timestamp NOT NULL DEFAULT current_timestamp(),
-  `UpdationDate` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
+  `UpdationDate` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
+  `ownerId` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tblvehicles`
 --
 
-INSERT INTO `tblvehicles` (`id`, `VehiclesTitle`, `VehicleNo`, `VehiclesOverview`, `PricePerDay`, `FuelType`, `ModelYear`, `SeatingCapacity`, `Vimage1`, `Vimage2`, `Vimage3`, `Vimage4`, `RegDate`, `UpdationDate`) VALUES
-(10, 'BMW 5 Series', 'MH 01 AB 1234', 'The BMW 5 Series is a luxury sedan that offers a perfect blend of style, performance, and comfort. With its sleek design and advanced features, it\'s the ideal choice for those who demand the best.', 2999, 'Petrol', 2018, 5, 'BMW 1.jpg', 'BMW 4.jpg', 'BMW 3.jpg', 'BMW 2.jpg', '2024-03-03 09:42:27', NULL),
-(11, 'Maruti Suzuki Swift', 'DL 02 CD 5678', 'The Maruti Suzuki Swift is a popular hatchback known for its agility, fuel efficiency, and practicality. It\'s perfect for navigating through the busy streets of India with ease.', 899, 'Petrol', 2020, 5, 'swift 2.jpg', 'swift 1.jpg', 'swift 3.jpg', 'swift 4.jpg', '2024-03-03 09:47:29', NULL),
-(12, 'Honda City', 'KA 03 EF 9102', 'The Honda City is a stylish and reliable sedan that offers a smooth ride and spacious interior. With its fuel-efficient engine and comfortable seating, it\'s perfect for both city commutes and long drives.', 1999, 'Petrol', 2019, 5, 'city 2.webp', 'cuty 4.webp', 'city 3.webp', 'city 1.webp', '2024-03-03 09:54:06', NULL),
-(13, 'Hyundai i20', 'TN 04 GH 3456', 'The Hyundai i20 is a premium hatchback that combines modern design with advanced features. It\'s perfect for urban driving, offering excellent fuel economy and agile handling.', 899, 'Petrol', 2021, 5, 'i20 1.jpg', 'i20 3.jpg', 'i20 4.jpg', 'i20 2.jpg', '2024-03-03 09:57:28', NULL),
-(14, 'Tata Nexon', 'GJ 05 IJ 6789', '\'The Tata Nexon is a compact SUV that offers a rugged yet stylish design along with impressive performance and safety features. It\'s perfect for tackling rough Indian roads while providing a comfortable ride for passengers.', 1199, 'Petrol', 2019, 5, 'nexon 1.webp', 'nexon 2.webp', 'nexon 3.webp', 'nexon 4.webp', '2024-03-03 10:01:31', NULL),
-(15, 'Toyota Innova Crysta', 'KA 06 KL 1234', 'The Toyota Innova Crysta is a versatile MPV known for its spacious cabin, powerful engine, and robust build quality. It\'s the perfect choice for family outings and long road trips.', 1499, 'Diesel', 2017, 7, 'crysta 1.webp', 'crysta 2.webp', 'crysta 4.webp', 'crysta 3.webp', '2024-03-03 10:06:31', NULL),
-(16, 'Mahindra Scorpio', 'BR 08 OP 9102', 'The Mahindra Scorpio is a rugged SUV known for its off-road capabilities and muscular design. It\'s the perfect vehicle for adventure enthusiasts who love to explore the great outdoors.', 1399, 'Diesel', 2018, 7, 'scorpio 1.webp', 'scorpio 3.webp', 'scorpio 2.webp', 'scorpio 4.webp', '2024-03-03 10:09:43', NULL);
+INSERT INTO `tblvehicles` (`id`, `VehiclesTitle`, `VehicleNo`, `VehiclesOverview`, `PricePerDay`, `FuelType`, `ModelYear`, `SeatingCapacity`, `Vimage1`, `Vimage2`, `Vimage3`, `Vimage4`, `RegDate`, `UpdationDate`, `ownerId`) VALUES
+(10, 'BMW 5 Series', 'MH 01 AB 1234', 'The BMW 5 Series is a luxury sedan that offers a perfect blend of style, performance, and comfort. With its sleek design and advanced features, it\'s the ideal choice for those who demand the best.', 2999, 'Diesel', 2018, 5, 'BMW 1.jpg', 'BMW 4.jpg', 'BMW 3.jpg', 'BMW 2.jpg', '2024-03-03 09:42:27', '2024-03-13 07:14:04', 2),
+(11, 'Maruti Suzuki Swift', 'DL 02 CD 5678', 'The Maruti Suzuki Swift is a popular hatchback known for its agility, fuel efficiency, and practicality. It\'s perfect for navigating through the busy streets of India with ease.', 899, 'Petrol', 2020, 5, 'swift 2.jpg', 'swift 1.jpg', 'swift 3.jpg', 'swift 4.jpg', '2024-03-03 09:47:29', NULL, 2),
+(12, 'Honda City', 'KA 03 EF 9102', 'The Honda City is a stylish and reliable sedan that offers a smooth ride and spacious interior. With its fuel-efficient engine and comfortable seating, it\'s perfect for both city commutes and long drives.', 1999, 'Petrol', 2019, 5, 'city 2.webp', 'cuty 4.webp', 'city 3.webp', 'city 1.webp', '2024-03-03 09:54:06', NULL, 2),
+(13, 'Hyundai i20', 'TN 04 GH 3456', 'The Hyundai i20 is a premium hatchback that combines modern design with advanced features. It\'s perfect for urban driving, offering excellent fuel economy and agile handling.', 899, 'Petrol', 2021, 5, 'i20 1.jpg', 'i20 3.jpg', 'i20 4.jpg', 'i20 2.jpg', '2024-03-03 09:57:28', NULL, 2),
+(14, 'Tata Nexon', 'GJ 05 IJ 6789', '\'The Tata Nexon is a compact SUV that offers a rugged yet stylish design along with impressive performance and safety features. It\'s perfect for tackling rough Indian roads while providing a comfortable ride for passengers.', 1199, 'Petrol', 2019, 5, 'nexon 1.webp', 'nexon 2.webp', 'nexon 3.webp', 'nexon 4.webp', '2024-03-03 10:01:31', NULL, 2),
+(15, 'Toyota Innova Crysta', 'KA 06 KL 1234', 'The Toyota Innova Crysta is a versatile MPV known for its spacious cabin, powerful engine, and robust build quality. It\'s the perfect choice for family outings and long road trips.', 1499, 'Diesel', 2017, 7, 'crysta 1.webp', 'crysta 2.webp', 'crysta 4.webp', 'crysta 3.webp', '2024-03-03 10:06:31', NULL, 2),
+(16, 'Mahindra Scorpio', 'BR 08 OP 9102', 'The Mahindra Scorpio is a rugged SUV known for its off-road capabilities and muscular design. It\'s the perfect vehicle for adventure enthusiasts who love to explore the great outdoors.', 1399, 'Diesel', 2018, 7, 'scorpio 1.webp', 'scorpio 3.webp', 'scorpio 2.webp', 'scorpio 4.webp', '2024-03-03 10:09:43', NULL, 2),
+(17, 'Maruti Suzuki WagonR', 'PB 10 ST 6789', 'The Maruti Suzuki WagonR is a practical and spacious hatchback that offers excellent fuel efficiency and affordability. It\'s the perfect choice for city dwellers looking for a reliable and comfortable car.', 699, 'Petrol', 2019, 5, 'rear-3-4-right-520328200_930x620.jpg', 'tail-lamp-1666712219_930x620.jpg', 'steering-close-up-1288209207_930x620.jpg', 'rear-3-4-left-589823254_930x620.jpg', '2024-03-03 13:50:51', NULL, 1),
+(18, 'Volkswagen Polo', 'PB 09 QR 3456', 'The Volkswagen Polo is a premium hatchback that offers a perfect blend of style, performance, and safety. With its refined engine and responsive handling, it delivers a thrilling driving experience.', 799, 'Petrol', 2021, 5, 'polo_1.webp', 'polo 2.webp', 'polo 4.webp', 'polo 3.webp', '2024-03-13 08:54:02', NULL, 2),
+(19, 'BMW 5 Series', 'DL 01 AB 1794', 'The BMW 5 Series is a luxury sedan that offers a perfect blend of style, performance, and comfort. With its sleek design and advanced features, it\'s the ideal choice for those who demand the best.', 1999, 'Petrol', 2015, 5, 'BMW 4.jpg', 'BMW 1.jpg', 'BMW 3.jpg', 'BMW 2.jpg', '2024-03-13 09:05:19', NULL, 3);
 
 --
 -- Indexes for dumped tables
@@ -172,13 +179,13 @@ ALTER TABLE `tblvehicles`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tblbooking`
 --
 ALTER TABLE `tblbooking`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `tblusers`
@@ -190,7 +197,7 @@ ALTER TABLE `tblusers`
 -- AUTO_INCREMENT for table `tblvehicles`
 --
 ALTER TABLE `tblvehicles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
