@@ -133,11 +133,6 @@ $msg="Booking Successfully Confirmed";
     </div>
 
 
-
-
-
-
-
     <?php include('includes/footer.php')?>
 
 

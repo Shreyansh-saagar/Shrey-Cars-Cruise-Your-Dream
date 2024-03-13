@@ -77,6 +77,7 @@ return true;
 <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet"> 
 </head>
 <body>
+<?php include('includes/header.php');?>
 
 
 <div class="container mt-5 mb-5 justify-content-center" id="loginform">
@@ -122,11 +123,11 @@ return true;
 			</form>
 			<p class="mb-2 text-decoration-none">Already have an account? <a href="login.php" data-toggle="modal" class="text-decoration-none" data-dismiss="modal">Login Here</a></p>
 			
-			<div class="d-flex">
+			<!-- <div class="d-flex">
 			<a href="index.php" class="me-4 text-decoration-none">Home</a>
 			<p class="me-4">|</p>
 			<a href="carListing.php" class="text-decoration-none">Car Listing</a>
-			</div>
+			</div> -->
 			
         </div>
     </div>
@@ -134,6 +135,7 @@ return true;
 
 
 <!-- footer -->
+<?php include('includes/footer.php'); ?>
 
 <!-- Scripts --> 
 <!-- company name -->

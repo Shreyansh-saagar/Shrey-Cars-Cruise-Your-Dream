@@ -52,6 +52,7 @@ if($query->rowCount() > 0)
 </head>
 <body>
 
+<?php include('includes/header.php');?>
 
 <div class="container mt-5 mb-5 justify-content-center" id="loginform">
     <div class="card px-1 py-4">
@@ -78,11 +79,11 @@ if($query->rowCount() > 0)
 			</form>
 			<p class="mb-2 text-decoration-none">Don't have an account? <a href="signup.php" data-toggle="modal" class="text-decoration-none" data-dismiss="modal">Signup Here</a></p>
 			
-			<div class="d-flex">
+			<!-- <div class="d-flex">
 			<a href="index.php" class="me-4 text-decoration-none">Home</a>
 			<p class="me-4">|</p>
 			<a href="carListing.php" class="text-decoration-none">Car Listing</a>
-			</div>
+			</div> -->
 			
         </div>
     </div>
@@ -90,6 +91,7 @@ if($query->rowCount() > 0)
 
 
 <!-- footer -->
+<?php include('includes/footer.php'); ?>
 
 <!-- Scripts --> 
 <!-- company name -->
